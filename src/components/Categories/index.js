@@ -1,19 +1,21 @@
 /* eslint-disable prettier/prettier */
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import styles from './styles';
 
-const Categories = ({categories,selectedCategory}) => {
+const Categories = ({categories,selectedCategory,onCategoryPress}) => {
   return (
     <FlatList
         horizontal
         data={categories}
+        style={{marginRight: -32 }}
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           const  selected = selectedCategory === item;
           return (
-            <View  style={[styles.itemContainer, selected ? styles.selectedItemContainer : {}]}>
+            <TouchableOpacity onPress={() =>onCategoryPress(item)} style={[styles.itemContainer, selected ? styles.selectedItemContainer : {}]}>
                   <Text style={[styles.item, selected  ? styles.selectedItem : {}]}>{item}</Text>
-            </View>
+            </TouchableOpacity>
           );
         }}
     />
